@@ -1,43 +1,18 @@
 <html>
     <head>
         <title>Pythonista WebIDE</title>
-        <!-- Latest compiled and minified CSS -->
+        
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
         <link rel="stylesheet" href="/static/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <script src="/static/jquery-2.2.0.min.js"></script>
         <script src="/static/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/solarized.css">
-        <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/theme/solarized.min.css"> -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/python/python.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/javascript/javascript.min.js"></script>
-        <script type="text/javascript">
-            window.onload = function() {
-                var editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
-                    lineNumbers: true,
-                    theme: "solarized light",
-                    <%if defined('filename'):
-                        import os.path
-                        ext = os.path.splitext(filename)[1][1:]
-                        if ext == 'py':%>
-                            mode: "python"
-                        %elif ext in ['json', 'pyui']:
-                            mode: {name: "javascript", json: true}
-                        %else:
-                            mode: false
-                        <%end
-                    end%>
-                });
-
-                $("#submit").click(function() {
-                    editor.save();
-                    $.post('/', $('#save').serialize());
-                    return false;
-                });
+        
+      <style>
+        #editor { 
+            width: 800px;
+            height: 600px;
             }
-        </script>
-        <link rel="stylesheet" type="text/css" href="/static/style.css">
+      </style>
     </head>
     <body class="base3-background">
         <nav class="navbar navbar-default base2-background base00-color">
@@ -77,6 +52,7 @@
                         <input name="filename" type="text" class="form-control base00-color base3-background" placeholder="Save as...">
                         %end
                     </div>
+                    <textarea name="code" id="code" style="display:none"> </textarea>
                     <button id="submit" type="submit" class="btn btn-default base01-color base3-background">Save</button>
                 </form>
             </div><!-- /.container-fluid -->
@@ -91,8 +67,22 @@
             %end
             <h2 class="base01-color">Edit File</h2>
             <p>
-                <textarea name="code" id="codemirror" form="save">{{code if defined('code') else ''}}</textarea>
+                <pre id="editor">{{code if defined('code') else ''}}</pre>                
             </p>
+            
         </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.getSession().setMode("ace/mode/python");
+        window.onload = function() {
+                    $("#submit").click(function() {
+                  
+                        $('#code')[0].value = editor.getValue();
+                        $.post('/', $('#save').serialize());
+                        return false;
+                    });
+                }
+    </script>
 </html>
