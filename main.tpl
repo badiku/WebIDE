@@ -6,12 +6,12 @@
         <script src="/static/jquery-2.2.0.min.js"></script>
         <script src="/static/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/codemirror.min.css">
         <link rel="stylesheet" type="text/css" href="/static/solarized.css">
-        <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/theme/solarized.min.css"> -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/python/python.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/javascript/javascript.min.js"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="/static/theme/solarized.min.css"> -->
+        <script type="text/javascript" src="/static/codemirror.min.js"></script>
+        <script type="text/javascript" src="/static/python.min.js"></script>
+        <script type="text/javascript" src="/static/javascript.min.js"></script>
         <script type="text/javascript">
             window.onload = function() {
                 var editor = CodeMirror.fromTextArea(document.getElementById("codemirror"), {
