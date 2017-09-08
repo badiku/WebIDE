@@ -1,6 +1,11 @@
 from bottle import get, post, route, run, debug, template, request, static_file, error, redirect # Import bottle's functions (from bottle import * might be better)
 import os, socket, errno # Import standard python libraries that we need
 
+import sys
+if sys.version_info.major == 3:
+  import codecs
+  open = codecs.open # compatible with python 2
+
 try:
     from urllib.request import pathname2url # Try to import pathname2url from the python 3 location
 except ImportError:
