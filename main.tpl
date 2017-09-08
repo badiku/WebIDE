@@ -72,7 +72,7 @@
             
         </div>
     </body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
         var editor = ace.edit("editor");
         editor.getSession().setMode("ace/mode/python");
